@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const treasuresBr = require('./tesouro');
+
 module.exports = {
   currency: async () => {
     try { 
@@ -102,8 +103,8 @@ module.exports = {
   },
   crypto:async () => {
     try { 
-      let response = "No Bitcoin tiu iu,"; 
-      let bitcoin = (await axios.get('  /API/ticker.aspx')).data.ticker.last.replace('.', ',');
+      let response = "No Bitcoin2U,"; 
+      let bitcoin = (await axios.get('https://www.bitcointoyou.com/API/ticker.aspx')).data.ticker.last.replace('.', ',');
       response += `o Bitcoin está R$ ${bitcoin} `; 
       let litecoin = (await axios.get('https://www.bitcointoyou.com/API/ticker_litecoin.aspx')).data.ticker.last.replace('.', ',');
       response += `, e o Litecoin está R$ ${litecoin} `;     

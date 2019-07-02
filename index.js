@@ -27,32 +27,18 @@ const GeneralIntentHandler = {
       let error = "";
       let response = "";
       try {
-        response += await consultor.macro()
+        response += await consultor.macro();
+        // response += await consultor.currency();
+        response += await consultor.ibov();
+        // response += await consultor.summary();
       } catch (err) {
-        error += "não consegui ler os dados da economia";
-      }
-
-      try {
-        response += await consultor.currency()
-      } catch (err) {
-        error += "não consegui ler os dados de câmbio";
-      }
-
-      try {
-        response += await consultor.ibov()
-      } catch (err) {
-        error += "não consegui ler os dados da bolsa";
-      }
-
-      try {
-        response += await consultor.summary()
-      } catch (err) {
-        error += "não consegui ler os dados de resumo da bolsa";
+        error += "não consegui gerar o resumo geral";
       }
 
       return handlerInput.responseBuilder
+            // .speak("oi")
             .speak(response+error)
-            .reprompt(promptDefault)
+            // .reprompt(promptDefault)
             .getResponse();
     }
 };
@@ -66,7 +52,7 @@ const CurrencyIntentHandler = {
 
     return handlerInput.responseBuilder
           .speak(response)
-          .reprompt(promptDefault)
+        //   .reprompt(promptDefault)
           .getResponse();
   }
 };
@@ -82,7 +68,7 @@ const StocksIntentHandler = {
 
     return handlerInput.responseBuilder
           .speak(response)
-          .reprompt(promptDefault)
+        //   .reprompt(promptDefault)
           .getResponse();
   }
 };
@@ -97,7 +83,7 @@ const MacroIntentHandler = {
 
     return handlerInput.responseBuilder
           .speak(response)
-          .reprompt(promptDefault)
+        //   .reprompt(promptDefault)
           .getResponse();
   }
 };
@@ -112,7 +98,7 @@ const CryptoIntentHandler = {
 
     return handlerInput.responseBuilder
           .speak(response)
-          .reprompt(promptDefault)
+        //   .reprompt(promptDefault)
           .getResponse();
   }
 };
@@ -126,7 +112,7 @@ const TreasuresIntentHandler = {
 
     return handlerInput.responseBuilder
           .speak(response)
-          .reprompt(promptDefault)
+        //   .reprompt(promptDefault)
           .getResponse();
   }
 };
@@ -136,7 +122,7 @@ const HelpIntentHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speechText = 'Posso te dar um resumo se você falar: geral, sobre a bolsa se você falar: ações, sobre índices do mercado se você falar: maro, sobre o tesouro direto se você falar: tesouro. Você ainda pode falar bitcoin e litecoin ou câmbio. Como posso te ajudar?';
+        const speechText = 'Posso te dar um resumo se você falar: geral, sobre a bolsa se você falar: ações, sobre índices do mercado se você falar: macro, sobre o tesouro direto se você falar: tesouro. Você ainda pode falar bitcoin e litecoin ou câmbio. Como posso te ajudar?';
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -181,7 +167,7 @@ const IntentReflectorHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(promptDefault)
+            // .reprompt(promptDefault)
             .getResponse();
     }
 };
@@ -199,7 +185,7 @@ const ErrorHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .reprompt(promptDefault)
+            // .reprompt(promptDefault)
             .getResponse();
     }
 };
@@ -223,3 +209,4 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addErrorHandlers(
         ErrorHandler)
     .lambda();
+
